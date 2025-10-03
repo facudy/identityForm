@@ -1,0 +1,42 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-card {
+    width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.login-header h2 {
+    color: #1890ff;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: #666;
+    margin: 0;
+}
+
+.login-tip {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f6f6f6;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.login-tip p {
+    margin: 4px 0;
+    color: #666;
+    font-size: 12px;
+}

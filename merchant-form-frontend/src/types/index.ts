@@ -1,4 +1,4 @@
-// 重命名FormData接口以避免与浏览器内置FormData冲突
+// merchant-form-frontend/src/types/index.ts
 export interface MerchantFormData {
     name: string;
     regionValues: string[];
@@ -10,8 +10,17 @@ export interface MerchantFormData {
     bankBranch: string;
 }
 
+export type FileUploadField =
+    | 'idCardFront'      // ID_CARD_FRONT
+    | 'idCardBack'       // ID_CARD_BACK
+    | 'bankCard'         // BANK_CARD
+    | 'qrCode'           // QR_CODE
+    | 'storeFront'       // STORE_FRONT
+    | 'storeInside'      // STORE_INSIDE
+    | 'cashier'          // CASHIER
+    | 'businessLicense'; // BUSINESS_LICENSE
+
 export interface FileUploads {
-    [key: string]: File | File[] | null;
     idCardFront: File | null;
     idCardBack: File | null;
     bankCard: File | null;
@@ -23,7 +32,6 @@ export interface FileUploads {
 }
 
 export interface FilePreviews {
-    [key: string]: string | string[] | null;
     idCardFront: string | null;
     idCardBack: string | null;
     bankCard: string | null;
@@ -34,10 +42,29 @@ export interface FilePreviews {
     businessLicense: string | null;
 }
 
-export interface RegionOption {
-    value: string;
-    label: string;
-    children?: RegionOption[];
+export interface MerchantRecord {
+    id: string;
+    name: string;
+    region_values: string[];
+    detail_address: string;
+    contact_name: string;
+    phone_number: string;
+    bank_card_holder?: string;
+    bank_city?: string;
+    bank_branch?: string;
+    created_at: Date;
+    updated_at: Date;
+    files: FileRecord[];
 }
 
-export type FileUploadField = keyof FileUploads;
+export interface FileRecord {
+    id: string;
+    merchant_id: string;
+    field_name: string;
+    filename: string;
+    original_name: string;
+    file_path: string;
+    file_size: number;
+    mime_type: string;
+    created_at: Date;
+}

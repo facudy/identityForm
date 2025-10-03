@@ -1,7 +1,11 @@
 const express = require('express');
 const { body } = require('express-validator');
 const upload = require('../config/multer');
-const { submitForm, getMerchants, getMerchantById } = require('../controllers/merchantController');
+const {
+  submitForm,
+  getMerchants,
+  getMerchantById
+} = require('../controllers/merchantController');
 
 const router = express.Router();
 

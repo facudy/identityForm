@@ -6,7 +6,7 @@ const pool = new Pool({
     port: process.env.DB_PORT || 5432,
     database: process.env.DB_NAME || 'merchant_form_db',
     user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD || '',
+    password: process.env.DB_PASSWORD || 'renzheng90401',
 });
 
 // 测试连接

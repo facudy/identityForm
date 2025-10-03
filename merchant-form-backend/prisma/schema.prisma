@@ -1,0 +1,66 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Merchant {
+  id                String   @id @default(cuid())
+  
+  // 基本信息
+  name              String
+  region_values     Json     // 存储地区选择的数组
+  detail_address    String
+  
+  // 联系人信息
+  contact_name      String
+  phone_number      String
+  
+  // 银行卡信息 (可选)
+  bank_card_holder  String?
+  bank_city         String?
+  bank_branch       String?
+  
+  // 系统字段
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  // 关联文件
+  files             File[]
+
+  @@map("merchants")
+}
+
+model File {
+  id            String      @id @default(cuid())
+  merchant_id   String
+  field_name    FileType    // 使用枚举来限制文件类型
+  filename      String      // 存储在服务器上的文件名
+  original_name String      // 用户上传时的原始文件名
+  file_path     String      // 文件存储路径
+  file_size     Int         // 文件大小（字节）
+  mime_type     String      // 文件 MIME 类型
+  created_at    DateTime    @default(now())
+
+  // 关联商户
+  merchant      Merchant    @relation(fields: [merchant_id], references: [id], onDelete: Cascade)
+
+  @@map("files")
+}
+
+enum FileType {
+  ID_CARD_FRONT      // 身份证人像面
+  ID_CARD_BACK       // 身份证国徽面
+  BANK_CARD          // 银行卡数字面
+  QR_CODE            // 拉卡拉二维码正面照
+  STORE_FRONT        // 门头照
+  STORE_INSIDE       // 内设照
+  CASHIER            // 收银台照
+  BUSINESS_LICENSE   // 营业执照
+
+  @@map("file_type")
+}
